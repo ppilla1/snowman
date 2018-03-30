@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+    <include file="db/changelog/db.changelog-master.xml"/>
+    <changeSet id="3" author="ppillai-integration">
+        <insert tableName="users">
+            <column name="name">Peter</column>
+            <column name="salary">3000.0</column>
+        </insert>
+        <insert tableName="users">
+            <column name="name">Sam</column>
+            <column name="salary">5000.0</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

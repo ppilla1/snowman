@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/db.changelog-master.yml
+  - changeSet:
+     id: 1
+     author: ppillai-integration
+     changes:
+      - sql:
+          sql: insert into users (name, salary) values ('Peter', 3000.0)
+      - sql:
+          sql: insert into users (name, salary) values ('Sam', 5000.0)
