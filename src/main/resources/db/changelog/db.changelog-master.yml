@@ -23,4 +23,41 @@ databaseChangeLog:
                 type: NUMBER(12,2)
                 constraints:
                   nullable: false
+  - changeSet:
+      id: 2
+      author: ppillai
+      changes:
+        - sql:
+            sql: CREATE OR REPLACE TYPE USER_TYPE AS OBJECT (NAME VARCHAR2(55), SALARY NUMBER(12,2))
+        - sql:
+            sql: CREATE OR REPLACE TYPE USER_LIST AS TABLE OF USER_TYPE
+  - changeSet:
+      id: 3
+      author: ppillai
+      changes:
+        - createProcedure:
+            comments: Package named ORAPACK
+            procedureName: ORAPACK
+            procedureBody: |-
+              CREATE OR REPLACE PACKAGE ORAPACK IS
+                PROCEDURE PROC1;
+              END ORAPACK;
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 4
+      author: ppillai
+      changes:
+        - createProcedure:
+            comments: Procedure named PROC1 in ORAPACK
+            procedureName: ORAPACK.PROC1
+            procedureBody: |-
+              CREATE OR REPLACE PACKAGE BODY ORAPACK IS
+                PROCEDURE PROC1
+                AS
+                BEGIN
+                  DBMS_OUTPUT.PUT_LINE('SOMETHING USEFUL');
+                END;
+              END ORAPACK;
+            relativeToChangelogFile: true
+
 
