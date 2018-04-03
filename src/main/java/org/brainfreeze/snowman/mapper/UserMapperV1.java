@@ -6,7 +6,7 @@ import org.brainfreeze.snowman.model.User;
 import java.util.List;
 
 @Mapper
-public interface UserMapper {
+public interface UserMapperV1 {
 
     @Select("select * from users order by id asc")
     List<User> findAll();

@@ -1,6 +1,6 @@
 package org.brainfreeze.snowman.api;
 
-import org.brainfreeze.snowman.mapper.UserMapper;
+import org.brainfreeze.snowman.mapper.UserMapperV1;
 import org.brainfreeze.snowman.model.User;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,9 +10,9 @@ import java.util.List;
 @RequestMapping("/api/v1/users")
 public class UserControllerV1 {
 
-    private UserMapper mapper;
+    private UserMapperV1 mapper;
 
-    public UserControllerV1(UserMapper mapper) {
+    public UserControllerV1(UserMapperV1 mapper) {
         this.mapper = mapper;
     }
 

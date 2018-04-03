@@ -36,28 +36,35 @@ databaseChangeLog:
       author: ppillai
       changes:
         - createProcedure:
-            comments: Package named ORAPACK
-            procedureName: ORAPACK
+            comments: Package for USER API's
+            procedureName: USER_API
             procedureBody: |-
-              CREATE OR REPLACE PACKAGE ORAPACK IS
-                PROCEDURE PROC1;
-              END ORAPACK;
+              CREATE OR REPLACE PACKAGE USER_API IS
+                PROCEDURE USER_ALL_R(users_cur OUT SYS_REFCURSOR);
+                PROCEDURE USER_BY_ID_R(id INT, users_cur OUT SYS_REFCURSOR);
+              END USER_API;
             relativeToChangelogFile: true
   - changeSet:
       id: 4
       author: ppillai
       changes:
         - createProcedure:
-            comments: Procedure named PROC1 in ORAPACK
-            procedureName: ORAPACK.PROC1
+            comments: Defining package body for USER API's
+            procedureName: USER_API.*
             procedureBody: |-
-              CREATE OR REPLACE PACKAGE BODY ORAPACK IS
-                PROCEDURE PROC1
+              CREATE OR REPLACE PACKAGE BODY USER_API IS
+                PROCEDURE USER_ALL_R(users_cur OUT SYS_REFCURSOR)
                 AS
                 BEGIN
-                  DBMS_OUTPUT.PUT_LINE('SOMETHING USEFUL');
+                  OPEN users_cur FOR
+                    SELECT * FROM USERS;
                 END;
-              END ORAPACK;
+
+                PROCEDURE USER_BY_ID_R(id INT, users_cur OUT SYS_REFCURSOR)
+                AS
+                BEGIN
+                  OPEN users_cur FOR
+                    SELECT * FROM USERS WHERE ID = id;
+                END;
+              END USER_API;
             relativeToChangelogFile: true
-
-
